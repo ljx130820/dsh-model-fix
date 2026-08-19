@@ -18,6 +18,17 @@ DSH 的 `llm-pi-ai` 走 pi-ai SDK（强制 `stream: true` 且要求流以 `finis
 
 这与代理无关：直连与走代理的响应完全相同，换代理解决不了。
 
+## ⚠️ 重要说明：无需开启 opencode 的「Allow models that train on request data」
+
+使用 muse-spark-1.2（经 opencode-go 路由）**不需要**在 opencode 平台设置里开启
+**「Allow models that train on request data」**。
+
+- 该开关是 opencode 的**数据训练授权**：开启后你的请求数据可能被用于模型训练，属于
+  需要慎重对待的隐私授权，**不要为了使用 muse-spark 而开启它**；
+- 实测：不开启该开关，直连 `https://opencode.ai/zen/go/v1` 的 muse-spark-1.2 即可正常
+  返回内容（本插件修复的只是流式收尾缺陷，与训练授权无关）；
+- 若在 opencode 设置里看到该开关，保持**关闭**即可；本文档所述修复不依赖它。
+
 ## 本插件做什么
 
 在 `llm/stream` waterfall 上，对匹配的模型把上述缺陷收尾为正常 `stop`：
