@@ -29,6 +29,10 @@ DSH 的 `llm-pi-ai` 走 pi-ai SDK（强制 `stream: true` 且要求流以 `finis
   返回内容（本插件修复的只是流式收尾缺陷，与训练授权无关）；
 - 若在 opencode 设置里看到该开关，保持**关闭**即可；本文档所述修复不依赖它。
 
+开关位置见下图（opencode 设置页 → 提供商区域，与「启用部署在中国的模型」相邻）：
+
+![opencode 设置页中的「Allow models that train on request data」开关](assets/opencode-settings-train-toggle.png)
+
 ## 本插件做什么
 
 在 `llm/stream` waterfall 上，对匹配的模型把上述缺陷收尾为正常 `stop`：
