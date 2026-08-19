@@ -1,0 +1,22 @@
+# dsh-model-fix bundle patch: mounts the stream-termination fix into the host
+# composition of a dsh profile. The plugin hooks the `llm/stream` waterfall
+# and converts the missing-terminal-event defect (opencode aggregator's
+# muse-spark-1.2 streams content but never sends `finish_reason` / `[DONE]`,
+# so pi-ai ends every turn with "Stream ended without finish_reason" →
+# TRANSPORT and the agent-level retry policy re-runs the step) into a clean
+# stop — only for matching models, and only when content was delivered.
+#
+# Install: `dsh plugin --profile <name> add <this package>` (npm or a local
+# path). The `dsh plugin` command pnpm-installs the package into the profile
+# and reconciles it into the profile's `dsh.profile.bundles` layer list.
+- insert:
+    - id: model-fix
+      # Node-resolvable package name — must stay in sync with package.json
+      # `name`. Quoted because `@` is a reserved indicator in YAML and cannot
+      # open a plain scalar.
+      name: 'dsh-model-fix'
+      config:
+        # Regex tested against the model id; only matching models are fixed.
+        modelPattern: '^muse-spark'
+        # Provider route allowlist; empty means every provider that matches.
+        providers: []
