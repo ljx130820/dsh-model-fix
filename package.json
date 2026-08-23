@@ -1,7 +1,7 @@
 {
   "name": "dsh-model-fix",
-  "version": "0.1.0",
-  "description": "DSH 模型流式缺陷修复：opencode 聚合端点上 muse-spark-1.2 不发送 finish_reason/[DONE]，导致 pi-ai 每次对话结尾报 \"Stream ended without finish_reason\"（TRANSPORT）并触发重试。本插件在 llm/stream waterfall 上把「已输出内容但结尾被截断」的 finish 改写为正常 stop，直连即可使用，无需代理。",
+  "version": "0.2.0",
+  "description": "DSH 模型流式缺陷修复：opencode 聚合端点上 muse-spark-1.2 / gpt-5.6-luna 不发送 finish_reason/[DONE]，导致 pi-ai 每次对话结尾报 \"Stream ended without finish_reason\"（TRANSPORT）并触发重试。本插件在 llm/stream waterfall 上把「已输出内容但结尾被截断」的 finish 改写为正常 stop，直连即可使用，无需代理。",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -21,20 +21,21 @@
   ],
   "license": "MIT",
   "author": {
-    "name": "程序员阿江 (Relakkes)",
-    "email": "relakkes@gmail.com",
-    "url": "https://github.com/NanmiCoder"
+    "name": "Retr67",
+    "email": "1143446954@qq.com",
+    "url": "https://github.com/Retr67"
   },
-  "homepage": "https://github.com/bitterSmilezzz/dsh-model-fix#readme",
+  "homepage": "https://github.com/Retr67/dsh-model-fix#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitterSmilezzz/dsh-model-fix.git"
+    "url": "git+https://github.com/Retr67/dsh-model-fix.git"
   },
   "keywords": [
     "dsh",
     "dsh-plugin",
     "deepseek-harness",
     "muse-spark",
+    "gpt-5.6-luna",
     "llm",
     "stream",
     "waterfall"
